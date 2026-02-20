@@ -2,128 +2,148 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mihar World</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mihar World</title>
 
 <style>
-
 :root{
---black:#050505;
---grey:#111;
---scarlet:#ff2400;
+  --scarlet:#ff2400;
 }
+
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-margin:0;
-background:var(--black);
-font-family:Arial;
-color:white;
-overflow-x:hidden;
+  font-family:Arial, Helvetica, sans-serif;
+  color:white;
+  overflow-x:hidden;
+  cursor:none;
+  background:black;
 }
 
-/* LOADER */
-
-#loader{
-position:fixed;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:999;
+/* Background Video */
+video.bg-video{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
 }
 
-.loader-text{
-color:var(--scarlet);
-font-size:30px;
-letter-spacing:10px;
-animation:pulse 1.5s infinite;
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  z-index:-1;
 }
 
-@keyframes pulse{
-0%{opacity:0.3}
-50%{opacity:1}
-100%{opacity:0.3}
+/* Custom Cursor */
+.cursor{
+  width:20px;
+  height:20px;
+  border:2px solid var(--scarlet);
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  transform:translate(-50%, -50%);
+  transition:0.08s ease;
+  z-index:9999;
 }
 
-/* HERO */
+/* Intro */
+#intro{
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
 
+#intro h1{
+  color:var(--scarlet);
+  letter-spacing:10px;
+  animation:fade 2s ease forwards;
+}
+
+@keyframes fade{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* Hero */
 .hero{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-position:relative;
-}
-
-.hero img{
-width:400px;
-max-width:90%;
-animation:float 6s ease-in-out infinite;
-filter:drop-shadow(0 0 20px rgba(255,36,0,0.4));
-}
-
-@keyframes float{
-0%,100%{transform:translateY(0px)}
-50%{transform:translateY(-20px)}
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
 .title{
-font-size:60px;
-letter-spacing:10px;
-margin-top:20px;
+  font-size:clamp(40px,6vw,80px);
 }
 
 .title span{
-color:var(--scarlet);
-text-shadow:0 0 20px var(--scarlet);
+  color:var(--scarlet);
+  text-shadow:0 0 25px var(--scarlet);
 }
 
 .enter{
-margin-top:20px;
-padding:15px 40px;
-border:1px solid var(--scarlet);
-color:var(--scarlet);
-text-decoration:none;
-transition:0.4s;
+  margin-top:30px;
+  padding:15px 50px;
+  border:1px solid var(--scarlet);
+  color:var(--scarlet);
+  text-decoration:none;
+  transition:0.3s;
 }
 
 .enter:hover{
-background:var(--scarlet);
-color:black;
-box-shadow:0 0 30px var(--scarlet);
+  background:var(--scarlet);
+  color:black;
 }
-
 </style>
-
 </head>
 
 <body>
 
-<div id="loader">
-<div class="loader-text">MIHAR WORLD</div>
+<div class="cursor" id="cursor"></div>
+
+<div id="intro">
+  <h1>MIHAR WORLD</h1>
+  <audio id="introSound" src="assets/loading.mp3"></audio>
 </div>
+
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="assets/background.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
 
 <section class="hero">
-
-<img src="assets/hero.png">
-
-<div class="title">
-MIHAR <span>WORLD</span>
-</div>
-
-<a href="#" class="enter">ENTER</a>
-
+  <div class="title">MIHAR <span>WORLD</span></div>
+  <a href="portfolio.html" class="enter">ENTER</a>
 </section>
 
 <script>
+// Intro Sound
+window.addEventListener("load",()=>{
+  const sound=document.getElementById("introSound");
+  sound.play().catch(()=>{});
+  setTimeout(()=>{
+    document.getElementById("intro").style.display="none";
+  },2500);
+});
 
-window.onload=function(){
-document.getElementById("loader").style.display="none"
-}
-
+// Custom Cursor
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",(e)=>{
+  cursor.style.left=e.clientX+"px";
+  cursor.style.top=e.clientY+"px";
+});
 </script>
 
 </body>
