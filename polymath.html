@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Polymath - Mihar</title>
+<title>Polymath</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-:root{--black:#050505;--grey:#111;--scarlet:#ff2400;}
-body{margin:0;background:var(--black);font-family:Arial;color:white;display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;text-align:center;}
-h1{font-size:60px;letter-spacing:10px;}
+:root{--scarlet:#ff2400;}
+body{background:black;color:white;font-family:Arial;text-align:center;padding:40px;}
 h1 span{color:var(--scarlet);text-shadow:0 0 20px var(--scarlet);}
-p{color:#aaa;margin-bottom:40px;}
-.links a{display:block;margin:10px;color:var(--scarlet);text-decoration:none;border:1px solid var(--scarlet);padding:10px 20px;transition:0.3s;}
-.links a:hover{background:var(--scarlet);color:black;box-shadow:0 0 20px var(--scarlet);}
-.back{margin-top:30px;color:#aaa;text-decoration:none;}
+.links a{display:block;margin:10px auto;width:200px;border:1px solid var(--scarlet);padding:10px;color:var(--scarlet);text-decoration:none;}
+iframe{margin-top:30px;border-radius:12px;}
+input{padding:10px;margin-top:20px;width:250px;}
+button{padding:10px 20px;background:var(--scarlet);border:none;color:white;}
 </style>
 </head>
 <body>
 <h1><span>POLYMATH</span></h1>
 <p>Coming Soon</p>
 <div class="links">
-<a href="https://www.instagram.com/mihar.official/" target="_blank">Instagram</a>
-<a href="https://www.youtube.com/@Mihar.official" target="_blank">YouTube</a>
-<a href="https://open.spotify.com/intl-fr/artist/2ffUQ1p5izNf8yPQxYdfLX" target="_blank">Spotify</a>
-<a href="https://www.deezer.com/en/artist/362132662" target="_blank">Deezer</a>
+<a href="https://www.instagram.com/mihar.official/">Instagram</a>
+<a href="https://www.youtube.com/@Mihar.official">YouTube</a>
+<a href="https://open.spotify.com/artist/2ffUQ1p5izNf8yPQxYdfLX">Spotify</a>
+<a href="https://www.deezer.com/en/artist/362132662">Deezer</a>
 </div>
-<a href="index.html" class="back">← Back</a>
+<iframe src="https://open.spotify.com/embed/artist/2ffUQ1p5izNf8yPQxYdfLX" width="300" height="380"></iframe>
+<h3>Join the Inner Circle</h3>
+<input type="email" placeholder="Enter your email"><br>
+<button onclick="alert('Collected')">Join</button>
+<br><br>
+<a href="index.html" style="color:gray;">Back</a>
 </body>
 </html>
