@@ -1,29 +1,20 @@
-
 body {
     margin:0;
-    overflow:hidden;
     background:black;
     font-family:Arial, sans-serif;
-}
-
-canvas {
-    position:fixed;
-    top:0;
-    left:0;
-}
-
-#ui {
-    position:absolute;
-    top:40%;
-    width:100%;
     text-align:center;
     color:white;
-    transition:1s;
 }
 
-#ui.fade {
-    opacity:0;
-    pointer-events:none;
+.hero {
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.statue {
+    width:300px;
+    opacity:0.9;
 }
 
 h1 span {
@@ -33,20 +24,9 @@ h1 span {
 
 button {
     padding:15px 40px;
-    margin:10px;
+    margin-top:20px;
     background:black;
     border:1px solid red;
     color:red;
     cursor:pointer;
-}
-
-.hidden {
-    display:none;
-}
-
-#panel {
-    position:absolute;
-    bottom:40px;
-    width:100%;
-    text-align:center;
 }

@@ -1,33 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mihar World</title>
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Mihar World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div id="ui">
-  <h1>MIHAR <span>WORLD</span></h1>
-  <button id="enter">ENTER</button>
+<div class="hero">
+    <img src="assets/statue.jpg" alt="Statue" class="statue">
+    <h1>MIHAR <span>WORLD</span></h1>
+    <button>ENTER</button>
 </div>
 
-<div id="panel" class="hidden">
-  <button onclick="alert('Connect Stripe for real payments')">MERCH</button>
-  <button onclick="alert('Connect Firebase Auth')">FAN VAULT</button>
-  <button onclick="toggleStats()">STATS</button>
-</div>
-
-<div id="stats" class="hidden">
-  <h2>Streaming</h2>
-  <p>Spotify: 1.2M</p>
-  <p>YouTube: 12.4M</p>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.152/examples/js/loaders/GLTFLoader.js"></script>
-<script src="js/scene.js"></script>
-<script src="js/main.js"></script>
 </body>
 </html>
