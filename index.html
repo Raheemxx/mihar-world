@@ -8,47 +8,17 @@
 <style>
 :root{
   --scarlet:#ff2400;
+  --bg:#0a0a0a;
+  --glass:rgba(255,255,255,0.05);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
   color:white;
+  font-family:Arial, Helvetica, sans-serif;
   overflow-x:hidden;
-  cursor:none;
-  background:black;
-}
-
-/* Background Video */
-video.bg-video{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-2;
-}
-
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  z-index:-1;
-}
-
-/* Custom Cursor */
-.cursor{
-  width:20px;
-  height:20px;
-  border:2px solid var(--scarlet);
-  border-radius:50%;
-  position:fixed;
-  pointer-events:none;
-  transform:translate(-50%, -50%);
-  transition:0.08s ease;
-  z-index:9999;
 }
 
 /* Intro */
@@ -64,13 +34,13 @@ video.bg-video{
 
 #intro h1{
   color:var(--scarlet);
-  letter-spacing:10px;
-  animation:fade 2s ease forwards;
+  letter-spacing:12px;
+  animation:fadeIn 2s ease forwards;
 }
 
-@keyframes fade{
-  from{opacity:0}
-  to{opacity:1}
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.9)}
+  to{opacity:1; transform:scale(1)}
 }
 
 /* Hero */
@@ -81,15 +51,33 @@ video.bg-video{
   justify-content:center;
   align-items:center;
   text-align:center;
+  padding:20px;
+}
+
+.image-container{
+  position:relative;
+  margin-bottom:30px;
+}
+
+.hero img{
+  width:100%;
+  max-width:420px;
+  animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
 }
 
 .title{
-  font-size:clamp(40px,6vw,80px);
+  font-size:clamp(40px,6vw,70px);
+  letter-spacing:4px;
 }
 
 .title span{
   color:var(--scarlet);
-  text-shadow:0 0 25px var(--scarlet);
+  text-shadow:0 0 20px var(--scarlet);
 }
 
 .enter{
@@ -98,51 +86,46 @@ video.bg-video{
   border:1px solid var(--scarlet);
   color:var(--scarlet);
   text-decoration:none;
-  transition:0.3s;
+  transition:0.3s ease;
+  backdrop-filter:blur(10px);
+  background:var(--glass);
 }
 
 .enter:hover{
   background:var(--scarlet);
   color:black;
+  transform:translateY(-3px);
+}
+
+footer{
+  position:absolute;
+  bottom:20px;
+  font-size:14px;
+  opacity:0.5;
 }
 </style>
 </head>
 
 <body>
 
-<div class="cursor" id="cursor"></div>
-
-<div id="intro">
-  <h1>MIHAR WORLD</h1>
-  <audio id="introSound" src="assets/loading.mp3"></audio>
-</div>
-
-<video class="bg-video" autoplay muted loop playsinline>
-  <source src="assets/background.mp4" type="video/mp4">
-</video>
-
-<div class="overlay"></div>
+<div id="intro"><h1>MIHAR WORLD</h1></div>
 
 <section class="hero">
+  <div class="image-container">
+    <img src="assets/hero.png" alt="Mihar World Hero Image">
+  </div>
+
   <div class="title">MIHAR <span>WORLD</span></div>
-  <a href="portfolio.html" class="enter">ENTER</a>
+
+  <a href="https://www.youtube.com/@Mihar.official/releases" class="enter">ENTER</a>
+  <footer>© 2026 Mihar World</footer>
 </section>
 
 <script>
-// Intro Sound
 window.addEventListener("load",()=>{
-  const sound=document.getElementById("introSound");
-  sound.play().catch(()=>{});
   setTimeout(()=>{
     document.getElementById("intro").style.display="none";
-  },2500);
-});
-
-// Custom Cursor
-const cursor=document.getElementById("cursor");
-document.addEventListener("mousemove",(e)=>{
-  cursor.style.left=e.clientX+"px";
-  cursor.style.top=e.clientY+"px";
+  },1800);
 });
 </script>
 
