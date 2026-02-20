@@ -1,18 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Mihar World</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Mihar World</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+:root{
+--black:#050505;
+--grey:#111;
+--scarlet:#ff2400;
+}
+
+body{
+margin:0;
+background:var(--black);
+font-family:Arial;
+color:white;
+overflow-x:hidden;
+}
+
+/* LOADER */
+
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.loader-text{
+color:var(--scarlet);
+font-size:30px;
+letter-spacing:10px;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:0.3}
+50%{opacity:1}
+100%{opacity:0.3}
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+position:relative;
+}
+
+.hero img{
+width:400px;
+max-width:90%;
+animation:float 6s ease-in-out infinite;
+filter:drop-shadow(0 0 20px rgba(255,36,0,0.4));
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0px)}
+50%{transform:translateY(-20px)}
+}
+
+.title{
+font-size:60px;
+letter-spacing:10px;
+margin-top:20px;
+}
+
+.title span{
+color:var(--scarlet);
+text-shadow:0 0 20px var(--scarlet);
+}
+
+.enter{
+margin-top:20px;
+padding:15px 40px;
+border:1px solid var(--scarlet);
+color:var(--scarlet);
+text-decoration:none;
+transition:0.4s;
+}
+
+.enter:hover{
+background:var(--scarlet);
+color:black;
+box-shadow:0 0 30px var(--scarlet);
+}
+
+</style>
+
 </head>
+
 <body>
 
-<div class="hero">
-    <img src="assets/statue.jpg" alt="Statue" class="statue">
-    <h1>MIHAR <span>WORLD</span></h1>
-    <button>ENTER</button>
+<div id="loader">
+<div class="loader-text">MIHAR WORLD</div>
 </div>
+
+<section class="hero">
+
+<img src="assets/hero.png">
+
+<div class="title">
+MIHAR <span>WORLD</span>
+</div>
+
+<a href="#" class="enter">ENTER</a>
+
+</section>
+
+<script>
+
+window.onload=function(){
+document.getElementById("loader").style.display="none"
+}
+
+</script>
 
 </body>
 </html>
