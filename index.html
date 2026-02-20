@@ -1,37 +1,33 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-title>Mihar World</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-:root{--scarlet:#ff2400;}
-body{margin:0;background:black;color:white;font-family:Arial;overflow:hidden;}
-#intro{position:fixed;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;z-index:999;}
-#intro h1{color:var(--scarlet);letter-spacing:15px;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:0.2}50%{opacity:1}}
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;}
-.image-container{position:relative;}
-.hero img{width:420px;animation:float 6s infinite;}
-.image-container::after{content:'';position:absolute;left:38%;top:32%;width:40px;height:40px;background:var(--scarlet);border-radius:50%;filter:blur(15px);animation:eye 2s infinite;}
-@keyframes eye{0%,100%{opacity:0.3}50%{opacity:1}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-.title{font-size:60px;}
-.title span{color:var(--scarlet);text-shadow:0 0 20px var(--scarlet);}
-.enter{margin-top:20px;padding:15px 40px;border:1px solid var(--scarlet);color:var(--scarlet);text-decoration:none;}
-</style>
+<title>Mihar World</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="intro"><h1>MIHAR WORLD</h1></div>
-<section class="hero">
-<div class="image-container">
-<img src="assets/hero.png">
+
+<div id="ui">
+  <h1>MIHAR <span>WORLD</span></h1>
+  <button id="enter">ENTER</button>
 </div>
-<div class="title">MIHAR <span>WORLD</span></div>
-<a href="polymath.html" class="enter">ENTER</a>
-</section>
-<script>
-setTimeout(()=>{document.getElementById("intro").style.display="none"},2000)
-</script>
+
+<div id="panel" class="hidden">
+  <button onclick="alert('Connect Stripe for real payments')">MERCH</button>
+  <button onclick="alert('Connect Firebase Auth')">FAN VAULT</button>
+  <button onclick="toggleStats()">STATS</button>
+</div>
+
+<div id="stats" class="hidden">
+  <h2>Streaming</h2>
+  <p>Spotify: 1.2M</p>
+  <p>YouTube: 12.4M</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152/examples/js/loaders/GLTFLoader.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

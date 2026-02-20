@@ -1,0 +1,52 @@
+
+body {
+    margin:0;
+    overflow:hidden;
+    background:black;
+    font-family:Arial, sans-serif;
+}
+
+canvas {
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+#ui {
+    position:absolute;
+    top:40%;
+    width:100%;
+    text-align:center;
+    color:white;
+    transition:1s;
+}
+
+#ui.fade {
+    opacity:0;
+    pointer-events:none;
+}
+
+h1 span {
+    color:red;
+    text-shadow:0 0 25px red;
+}
+
+button {
+    padding:15px 40px;
+    margin:10px;
+    background:black;
+    border:1px solid red;
+    color:red;
+    cursor:pointer;
+}
+
+.hidden {
+    display:none;
+}
+
+#panel {
+    position:absolute;
+    bottom:40px;
+    width:100%;
+    text-align:center;
+}
