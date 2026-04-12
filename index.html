@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIHAR</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #c0000a;
+      --red-glow: #ff1a1a;
+      --red-dim: #7a0005;
+      --cream: #e8dcc8;
+      --cream-dim: #a09080;
+      --black: #000000;
+      --black-soft: #0a0a0a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'IM Fell English', Georgia, serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      border-bottom: 1px solid rgba(192,0,10,0.15);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.25em;
+      color: var(--cream);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--red-glow); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-portrait {
+      position: absolute;
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      width: min(620px, 90vw);
+      opacity: 0.85;
+      mix-blend-mode: lighten;
+      pointer-events: none;
+      animation: portraitFade 2.5s ease forwards;
+    }
+
+    @keyframes portraitFade {
+      from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+      to   { opacity: 0.85; transform: translateX(-50%) translateY(0); }
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center bottom, transparent 30%, var(--black) 75%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      margin-top: -12vh;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+      animation: fadeUp 1s 0.4s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(4.5rem, 15vw, 11rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      line-height: 0.9;
+      color: var(--cream);
+      text-shadow: 0 0 60px rgba(192,0,10,0.3);
+      animation: fadeUp 1s 0.6s ease both;
+    }
+
+    .hero-sub {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      letter-spacing: 0.15em;
+      color: var(--cream-dim);
+      margin-top: 1.2rem;
+      animation: fadeUp 1s 0.8s ease both;
+    }
+
+    .hero-divider {
+      width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--red), transparent);
+      margin: 2rem auto;
+      animation: fadeUp 1s 1s ease both;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      border: 1px solid rgba(192,0,10,0.5);
+      padding: 0.8rem 2.2rem;
+      transition: all 0.3s;
+      animation: fadeUp 1s 1.2s ease both;
+    }
+
+    .hero-cta:hover {
+      background: rgba(192,0,10,0.12);
+      border-color: var(--red-glow);
+      color: var(--red-glow);
+      text-shadow: 0 0 12px rgba(255,26,26,0.4);
+    }
+
+    /* ─── RED VIGNETTE BOTTOM ─── */
+    .section-vignette {
+      height: 140px;
+      background: linear-gradient(to bottom, transparent, rgba(100,0,5,0.08), transparent);
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative; z-index: 1;
+      padding: 7rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--cream-dim);
+      margin-bottom: 1.4rem;
+    }
+
+    .about-text p strong {
+      color: var(--cream);
+      font-weight: 400;
+    }
+
+    .about-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .devil-cover {
+      width: 100%;
+      max-width: 380px;
+      border: 1px solid rgba(192,0,10,0.2);
+      filter: brightness(0.9) contrast(1.05);
+      transition: filter 0.5s;
+    }
+
+    .devil-cover:hover {
+      filter: brightness(1) contrast(1.1);
+    }
+
+    /* ─── LATEST RELEASE ─── */
+    .release-section {
+      text-align: center;
+      padding: 7rem 3rem;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .release-card {
+      position: relative;
+      border: 1px solid rgba(192,0,10,0.15);
+      background: rgba(10,0,0,0.5);
+      padding: 2rem 1.5rem;
+      text-align: left;
+      transition: border-color 0.3s, background 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .release-card:hover {
+      border-color: rgba(192,0,10,0.5);
+      background: rgba(192,0,10,0.05);
+    }
+
+    .release-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 2px; height: 0;
+      background: var(--red);
+      transition: height 0.4s;
+    }
+
+    .release-card:hover::before { height: 100%; }
+
+    .card-number {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.4em;
+      color: var(--red-dim);
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .card-meta {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: var(--cream-dim);
+    }
+
+    /* ─── MANIFESTO / QUOTE ─── */
+    .manifesto {
+      text-align: center;
+      padding: 9rem 3rem;
+      position: relative;
+    }
+
+    .manifesto::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(192,0,10,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .manifesto blockquote {
+      position: relative; z-index: 1;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      line-height: 1.7;
+      color: var(--cream);
+      max-width: 780px;
+      margin: 0 auto 2rem;
+    }
+
+    .manifesto cite {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .manifesto .ornament {
+      color: var(--red-dim);
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── LINKS / SOCIAL ─── */
+    .links-section {
+      padding: 5rem 3rem;
+      text-align: center;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
+
+    .social-link {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(192,0,10,0.3);
+      padding-bottom: 3px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .social-link:hover {
+      color: var(--red-glow);
+      border-color: var(--red-glow);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(192,0,10,0.1);
+      padding: 2.5rem 3rem;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+
+    footer p {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(160,144,128,0.4);
+    }
+
+    footer .red-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--red-dim);
+      margin: 0 0.8rem;
+      vertical-align: middle;
+    }
+
+    /* ─── HORIZONTAL RULE ─── */
+    .hr-ornament {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 0 auto 3rem;
+      max-width: 300px;
+    }
+
+    .hr-ornament span {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(192,0,10,0.3));
+    }
+
+    .hr-ornament span:last-child {
+      background: linear-gradient(to left, transparent, rgba(192,0,10,0.3));
+    }
+
+    .hr-ornament i {
+      width: 5px; height: 5px;
+      background: var(--red-dim);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #about, #music, #contact {
+      scroll-margin-top: 80px;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red-dim); border-radius: 2px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      section { padding: 5rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { order: -1; }
+      .devil-cover { max-width: 280px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Mihar</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img
+      class="hero-portrait"
+      src="Engraved_Portrait_No_Glasses.png"
+      alt="Mihar — engraved portrait"
+    />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Artist &nbsp;·&nbsp; mihar.world</p>
+      <h1 class="hero-title">MIHAR</h1>
+      <p class="hero-sub">Where the silence becomes sound</p>
+      <div class="hero-divider"></div>
+      <a href="#music" class="hero-cta">Explore the Work</a>
+    </div>
+  </div>
+
+  <div class="section-vignette"></div>
+
+  <!-- ABOUT -->
+  <section>
+    <div id="about" class="about-grid">
+      <div class="about-text">
+        <p class="section-label">The Artist</p>
+        <h2 class="section-title">Carved from<br/>darkness</h2>
+        <p>
+          <strong>Mihar</strong> is a contemporary artist whose work moves between raw emotion and refined expression.
+          Rooted in cultural identity and driven by personal truth, Mihar's art explores the tension between
+          vulnerability and strength, tradition and modernity, silence and voice.
+        </p>
+        <p>
+          Each piece is a visual narrative — a reflection of lived experience, inner conflict, and the search
+          for meaning in a constantly shifting world. Through layered textures, expressive forms, and intentional
+          symbolism, Mihar creates more than images; they are <strong>moments suspended in time</strong>, inviting
+          viewers to pause, reflect, and feel.
+        </p>
+        <p>
+          His artistic universe blends cultural depth with a modern perspective, shaping a distinctive visual language
+          that speaks to <strong>identity, resilience, and human connection</strong>. This space is a window into
+          Mihar's evolving journey — where art, identity, and emotion converge.
+        </p>
+      </div>
+      <div class="about-visual">
+        <img
+          class="devil-cover"
+          src="Devil_s_Whisper_-_Cover_3.png"
+          alt="Mihar artwork"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <div class="release-section">
+    <div id="music">
+      <p class="section-label">Discography</p>
+      <h2 class="section-title">The Works</h2>
+      <div class="hr-ornament">
+        <span></span><i></i><span></span>
+      </div>
+      <div class="release-grid" style="max-width:360px; margin:3.5rem auto 0;">
+        <div class="release-card" style="cursor:default;">
+          <p class="card-number">001 &nbsp;·&nbsp; Single</p>
+          <p class="card-title">Est Tu Saine ?</p>
+          <p class="card-meta" style="color:var(--red); font-style:normal; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase;">Coming Soon</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKS -->
+  <div class="links-section">
+    <div id="contact">
+      <p class="section-label">Find Mihar</p>
+      <h2 class="section-title" style="font-size: clamp(1.4rem,3vw,2rem);">Streaming & Social</h2>
+      <div class="social-row">
+        <a class="social-link" href="https://open.spotify.com/intl-fr/artist/2ffUQ1p5izNf8yPQxYdfLX?si=trnDj8s9QH2jO1ZM7iOKHQ" target="_blank" rel="noopener">Spotify</a>
+        <a class="social-link" href="https://www.youtube.com/@Mihar.official" target="_blank" rel="noopener">YouTube</a>
+        <a class="social-link" href="https://www.instagram.com/mihar.official/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      © 2025 Mihar
+      <span class="red-dot"></span>
+      mihar.world
+      <span class="red-dot"></span>
+      All rights reserved
+    </p>
+  </footer>
+
+
+</body>
+</html>
